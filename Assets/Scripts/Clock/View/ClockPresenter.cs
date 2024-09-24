@@ -1,9 +1,6 @@
 ﻿using System;
 using PustoStudio.ClockApp.Clock.Model;
 using R3;
-
-using UnityEngine;
-
 using Zenject;
 
 namespace PustoStudio.ClockApp.Clock.View
