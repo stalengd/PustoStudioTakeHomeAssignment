@@ -12,6 +12,7 @@ namespace PustoStudio.ClockApp.Clock.Model
         private readonly ClockConfig _clockConfig;
         private readonly IServerTimeProvider _serverTimeProvider;
 
+        private const double TickIntervalSeconds = 0.5;
         private double _prevTickTime;
         private bool _isLoadingTime = false;
         private DateTime _lastLoadTimestamp;
@@ -31,8 +32,11 @@ namespace PustoStudio.ClockApp.Clock.Model
         public void Tick()
         {
             var localTime = Time.unscaledTimeAsDouble;
-            _clockModel.Tick(TimeSpan.FromSeconds(localTime - _prevTickTime));
-            _prevTickTime = localTime;
+            if (localTime - _prevTickTime >= TickIntervalSeconds)
+            {
+                _clockModel.Tick(TimeSpan.FromSeconds(localTime - _prevTickTime));
+                _prevTickTime = localTime;
+            }
             if (IsTimeShouldBeReloaded())
             {
                 LoadCurrentTime().Forget();
