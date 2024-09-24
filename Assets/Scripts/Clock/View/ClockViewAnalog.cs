@@ -15,17 +15,18 @@ namespace PustoStudio.ClockApp.Clock.View
         [SerializeField] private float _tweenDurationSeconds = 0.5f;
         [SerializeField] private Ease _tweenEase = Ease.InOutQuad;
 
-        public override void SetTime(DateTime dateTime)
+        public override void SetTime(DateTime dateTime, bool isInstant)
         {
             var time = dateTime.TimeOfDay;
-            SetHand(_hourHand, GetHoursAngle(time));
-            SetHand(_minuteHand, GetMinutesAngle(time));
-            SetHand(_secondHand, GetSecondsAngle(time));
+            SetHand(_hourHand, GetHoursAngle(time), isInstant);
+            SetHand(_minuteHand, GetMinutesAngle(time), isInstant);
+            SetHand(_secondHand, GetSecondsAngle(time), isInstant);
         }
 
-        private void SetHand(Transform hand, float angle)
+        private void SetHand(Transform hand, float angle, bool isInstant)
         {
-            hand.DOLocalRotate(new(0, 0, angle), _tweenDurationSeconds).SetEase(_tweenEase);
+            var duration = isInstant ? 0f : _tweenDurationSeconds;
+            hand.DOLocalRotate(new(0, 0, angle), duration).SetEase(_tweenEase);
         }
 
         private static float GetHoursAngle(TimeSpan time)

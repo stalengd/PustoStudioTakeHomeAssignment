@@ -12,7 +12,7 @@ namespace PustoStudio.ClockApp.Clock.View
 
         private readonly StringBuilder _buffer = new();
 
-        public override void SetTime(DateTime time)
+        public override void SetTime(DateTime time, bool isInstant)
         {
             _buffer.Clear();
             _buffer.AppendFormat(_format, time);

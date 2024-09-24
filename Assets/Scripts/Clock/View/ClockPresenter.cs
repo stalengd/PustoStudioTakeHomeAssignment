@@ -20,8 +20,9 @@ namespace PustoStudio.ClockApp.Clock.View
 
         public void Initialize()
         {
+            DisplayTime(_clockModel.CurrentTime.CurrentValue, isInstant: true);
             _clockModel.CurrentTime
-                .Subscribe(DisplayTime)
+                .Subscribe(time => DisplayTime(time, isInstant: false))
                 .AddTo(ref _disposables);
         }
 
@@ -30,9 +31,9 @@ namespace PustoStudio.ClockApp.Clock.View
             _disposables.Dispose();
         }
 
-        private void DisplayTime(DateTime? time)
+        private void DisplayTime(DateTime? time, bool isInstant = false)
         {
-            _clockView.SetTime(time.GetValueOrDefault(DateTime.MinValue));
+            _clockView.SetTime(time.GetValueOrDefault(DateTime.MinValue), isInstant);
         }
     }
 }

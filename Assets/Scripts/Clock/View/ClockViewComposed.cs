@@ -7,11 +7,11 @@ namespace PustoStudio.ClockApp.Clock.View
     {
         [SerializeField] private ClockViewBase[] _views;
 
-        public override void SetTime(DateTime time)
+        public override void SetTime(DateTime time, bool isInstant)
         {
             foreach (var view in _views)
             {
-                view.SetTime(time);
+                view.SetTime(time, isInstant);
             }
         }
     }
