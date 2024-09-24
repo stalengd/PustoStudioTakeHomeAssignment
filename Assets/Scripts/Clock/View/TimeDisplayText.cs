@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PustoStudio.ClockApp.Clock.View
 {
-    public sealed class ClockViewText : ClockViewBase
+    public sealed class TimeDisplayText : TimeDisplayBase
     {
         [SerializeField] private string _format = "{0:HH:mm:ss}";
         [SerializeField] private TMP_Text _text;

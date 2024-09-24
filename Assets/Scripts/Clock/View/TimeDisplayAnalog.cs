@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PustoStudio.ClockApp.Clock.View
 {
-    public sealed class ClockViewAnalog : ClockViewBase
+    public sealed class TimeDisplayAnalog : TimeDisplayBase
     {
         [Header("Hands")]
         [SerializeField] private Transform _hourHand;

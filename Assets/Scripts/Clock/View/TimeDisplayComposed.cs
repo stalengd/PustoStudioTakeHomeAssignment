@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace PustoStudio.ClockApp.Clock.View
 {
-    public sealed class ClockViewComposed : ClockViewBase
+    public sealed class TimeDisplayComposed : TimeDisplayBase
     {
-        [SerializeField] private ClockViewBase[] _views;
+        [SerializeField] private TimeDisplayBase[] _displays;
 
         public override void SetTime(DateTime time, bool isInstant)
         {
-            foreach (var view in _views)
+            foreach (var view in _displays)
             {
                 view.SetTime(time, isInstant);
             }

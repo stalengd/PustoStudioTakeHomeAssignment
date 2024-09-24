@@ -8,11 +8,11 @@ namespace PustoStudio.ClockApp.Clock.View
     public sealed class ClockPresenter : IInitializable, IDisposable
     {
         private readonly ClockModel _clockModel;
-        private readonly ClockViewBase _clockView;
+        private readonly ClockView _clockView;
 
         private DisposableBag _disposables;
 
-        public ClockPresenter(ClockModel clockModel, ClockViewBase clockView)
+        public ClockPresenter(ClockModel clockModel, ClockView clockView)
         {
             _clockModel = clockModel;
             _clockView = clockView;
