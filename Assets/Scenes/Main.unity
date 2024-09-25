@@ -1110,7 +1110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a525e67a47267d5488e82aa20fa89675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensetivity: 0.1
+  _hourHand: {fileID: 288028449}
+  _minuteHand: {fileID: 1475522756}
+  _secondHand: {fileID: 425410913}
+  _maxAngleToSelectHand: 5
 --- !u!1 &1354114541
 GameObject:
   m_ObjectHideFlags: 0

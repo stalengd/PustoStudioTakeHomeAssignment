@@ -1,9 +1,6 @@
 ﻿using System;
 using PustoStudio.ClockApp.Clock.Model;
 using R3;
-
-using UnityEngine;
-
 using Zenject;
 
 namespace PustoStudio.ClockApp.Clock.View
@@ -58,7 +55,6 @@ namespace PustoStudio.ClockApp.Clock.View
             }
             else
             {
-                Debug.Log(_editedTime);
                 if (_editedTime.HasValue)
                 {
                     _clockModel.SetOffsettedTime(_editedTime.Value);
