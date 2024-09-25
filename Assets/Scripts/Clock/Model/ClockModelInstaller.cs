@@ -16,7 +16,7 @@ namespace PustoStudio.ClockApp.Clock.Model
             Container.BindInterfacesAndSelfTo<ClockService>()
                 .AsSingle();
             Container.Bind<IServerTimeProvider>()
-                .To<ServerTimeProviderYandex>()
+                .To<ServerTimeProviderTimeApiIo>()
                 .AsSingle();
             Container.Bind<ClockConfig>()
                 .FromInstance(_clockConfig);

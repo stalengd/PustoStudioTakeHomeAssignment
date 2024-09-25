@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3601096404f499943938bfc81a6a2b1b, type: 3}
   m_Name: ClockConfig
   m_EditorClassIdentifier: 
-  _currentTimeApiEndpoint: https://yandex.com/time/sync.json
+  _currentTimeApiEndpoint: https://timeapi.io/api/time/current/zone?timeZone=Etc%2FUTC
   _currentTimeLoadIntervalSeconds: 3600
