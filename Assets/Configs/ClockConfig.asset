@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ClockConfig
   m_EditorClassIdentifier: 
   _currentTimeApiEndpoint: https://yandex.com/time/sync.json
-  _currentTimeLoadIntervalSeconds: 60
+  _currentTimeLoadIntervalSeconds: 3600
