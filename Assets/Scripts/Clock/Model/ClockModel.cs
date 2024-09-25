@@ -9,12 +9,19 @@ namespace PustoStudio.ClockApp.Clock.Model
 
         private DateTime? _baselineTime;
         private TimeSpan _passedFromBaseline;
+        private TimeSpan _timeOffset;
         private readonly ReactiveProperty<DateTime?> _currentTime = new(null);
 
-        public void SetTime(DateTime time)
+        public void SetAbsoluteTime(DateTime time)
         {
             _baselineTime = time;
             _passedFromBaseline = TimeSpan.Zero;
+            RefreshCurrentTime();
+        }
+
+        public void SetOffsettedTime(DateTime time)
+        {
+            _timeOffset = time - (_currentTime.Value.GetValueOrDefault() - _timeOffset);
             RefreshCurrentTime();
         }
 
@@ -35,7 +42,7 @@ namespace PustoStudio.ClockApp.Clock.Model
                 _currentTime.Value = null;
                 return;
             }
-            _currentTime.Value = baselineTime + _passedFromBaseline;
+            _currentTime.Value = baselineTime + _timeOffset + _passedFromBaseline;
         }
     }
 }

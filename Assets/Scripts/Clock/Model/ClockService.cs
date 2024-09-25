@@ -15,7 +15,7 @@ namespace PustoStudio.ClockApp.Clock.Model
         private const double TickIntervalSeconds = 0.5;
         private double _prevTickTime;
         private bool _isLoadingTime = false;
-        private DateTime _lastLoadTimestamp;
+        private double _lastLoadTimestamp;
 
         public ClockService(ClockModel clockModel, ClockConfig clockConfig, IServerTimeProvider serverTimeProvider)
         {
@@ -51,32 +51,31 @@ namespace PustoStudio.ClockApp.Clock.Model
             }
             _isLoadingTime = true;
             var timeOrNone = await _serverTimeProvider.GetCurrentTime();
+            _lastLoadTimestamp = Time.unscaledTimeAsDouble;
             if (timeOrNone is { } time)
             {
                 Debug.Log("Current time was successfully loaded from the server.");
-                _clockModel.SetTime(time);
-                _lastLoadTimestamp = _clockModel.CurrentTime.CurrentValue.Value;
+                _clockModel.SetAbsoluteTime(time);
                 _isLoadingTime = false;
                 return;
             }
             if (fallbackOnFailure)
             {
                 Debug.Log("Current time can not be loaded from the server, falling back to local.");
-                _clockModel.SetTime(DateTime.UtcNow);
+                _clockModel.SetAbsoluteTime(DateTime.UtcNow);
             }
             else
             {
                 Debug.Log("Current time can not be loaded from the server, current time unchanged.");
             }
-            _lastLoadTimestamp = _clockModel.CurrentTime.CurrentValue.Value;
             _isLoadingTime = false;
         }
 
         private bool IsTimeShouldBeReloaded()
         {
+            var localTime = Time.unscaledTimeAsDouble;
             return !_isLoadingTime &&
-                _clockModel.CurrentTime.CurrentValue is { } time &&
-                (time - _lastLoadTimestamp) >= _clockConfig.CurrentTimeLoadInterval;
+                (localTime - _lastLoadTimestamp) >= _clockConfig.CurrentTimeLoadInterval.TotalSeconds;
         }
     }
 }
