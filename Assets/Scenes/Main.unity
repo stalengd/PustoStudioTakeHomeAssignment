@@ -1098,6 +1098,7 @@ MonoBehaviour:
   _secondHand: {fileID: 425410913}
   _tweenDurationSeconds: 0.3
   _tweenEase: 30
+  _tweenEaseOvershoot: 1
 --- !u!114 &1339318808
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace PustoStudio.ClockApp.Clock.View
         [Header("Animation")]
         [SerializeField] private float _tweenDurationSeconds = 0.5f;
         [SerializeField] private Ease _tweenEase = Ease.InOutQuad;
+        [SerializeField] private float _tweenEaseOvershoot = 0.5f;
 
         public override void SetTime(DateTime dateTime, bool isInstant)
         {
@@ -26,7 +27,10 @@ namespace PustoStudio.ClockApp.Clock.View
         private void SetHand(Transform hand, float angle, bool isInstant)
         {
             var duration = isInstant ? 0f : _tweenDurationSeconds;
-            hand.DOLocalRotate(new(0, 0, angle), duration).SetEase(_tweenEase);
+            var tweener = hand.DOLocalRotate(new(0, 0, Mathf.Repeat(angle, 360)), duration)
+                .From(hand.rotation.eulerAngles)
+                .SetEase(_tweenEase, _tweenEaseOvershoot);
+            tweener.fullPosition = 0f;
         }
 
         private static float GetHoursAngle(TimeSpan time)
